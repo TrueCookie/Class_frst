@@ -20,7 +20,7 @@ public:
 		top = nullptr;
 	};
 	~stack() {
-		//TODO
+		//TODO destruct
 		while (!is_empty()) {
 			delete top;
 		}
@@ -69,23 +69,15 @@ void stack::read(){
 
 
 void stack::reverse() {
-	int *tmp_arr = new int[size];
-
-	int i = 0;
-	int tmp = size;
-	while (!is_empty()) {
-		tmp_arr[i] = *pop();
-		i++;
+	node_t **tmpDown = &top->prev;
+	node_t *tmpUp = top;
+	while (tmpDown != nullptr) {
+		top->prev = tmpUp;
+		*tmpDown = tmpUp;
+		tmpUp->prev = 
 	}
+	top = *tmpDown;
 	
-	i = 0;
-	while (i < tmp) {
-		push(tmp_arr[i]);
-		i++;
-	}
-	
-
-	delete [] tmp_arr;
 }
 
 int main() {
