@@ -24,6 +24,7 @@ public:
 		while (!is_empty()) {
 			delete top;
 		}
+		std::cout << "Destructing...";
 	};
 
 	void push(int);
@@ -69,15 +70,18 @@ void stack::read(){
 
 
 void stack::reverse() {
-	node_t **tmpDown = &top->prev;
-	node_t *tmpUp = top;
-	while (tmpDown != nullptr) {
-		top->prev = tmpUp;
-		*tmpDown = tmpUp;
-		tmpUp->prev = 
+	node_t **tmpDown = &top->prev; 
+	node_t *tmpUp = top; // x
+	node_t *t = nullptr;
+	node_t *y = tmpUp;
+	node_t *r = nullptr;
+	while (y != nullptr) {
+		t = y->prev;
+		y->prev = r;
+		r = y; 
+		y = t;
 	}
-	top = *tmpDown;
-	
+	top = r;
 }
 
 int main() {
@@ -90,7 +94,7 @@ int main() {
 
 	//TODO: read stack content
 
-	my_stack.reverse();
+	//my_stack.reverse();
 
 	for (int i = 0; i < 10; ++i) {
 		my_stack.read();
