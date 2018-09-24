@@ -24,7 +24,7 @@ public:
 		while (!is_empty()) {
 			delete top;
 		}
-		std::cout << "Destructing...";
+		std::cout << "Destruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuucting...";
 	};
 
 	void push(int);
@@ -69,11 +69,9 @@ void stack::read(){
 	}
 
 
-void stack::reverse() {
-	node_t **tmpDown = &top->prev; 
-	node_t *tmpUp = top; // x
+void stack::reverse() { 
 	node_t *t = nullptr;
-	node_t *y = tmpUp;
+	node_t *y = top;
 	node_t *r = nullptr;
 	while (y != nullptr) {
 		t = y->prev;
@@ -82,24 +80,29 @@ void stack::reverse() {
 		y = t;
 	}
 	top = r;
+
+	delete t, y, r;
 }
 
 int main() {
 	// int val;
 	stack my_stack;
 
-	for (int i = 0; i < 10; ++i) {
+	int slots_amount = 0;
+	std::cout << "Input the amount of slots: ";
+	std::cin >> slots_amount;
+
+	for (int i = 0; i < slots_amount; ++i) {
 		my_stack.push(i);
 	}
 
 	//TODO: read stack content
 
-	//my_stack.reverse();
+	my_stack.reverse();
 
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < slots_amount; ++i) {
 		my_stack.read();
 	}	
-
 	
 
 	_getch();
