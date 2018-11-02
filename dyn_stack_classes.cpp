@@ -25,15 +25,14 @@ public:
 	};
 	void push(int);
 	bool is_empty();
-	void read();
 };
 
 class stack : public collection{
 public:
 	int* pop();
 	void reverse();
+	void read_stack();
 };
-
 
 void collection::push(int value) {
     node_t* tmp = new node_t();
@@ -62,7 +61,7 @@ bool collection::is_empty() {
 	return top == nullptr;
 }
 
-void collection::read(){
+void stack::read_stack(){
 	while (!is_empty())
 		std::cout << *pop() << std::endl;
 	}
@@ -96,7 +95,7 @@ int main() {
 	my_stack.reverse();
 
 	for (int i = 0; i < slots_amount; ++i) {
-		my_stack.read();
+		my_stack.read_stack();
 	}	
 	
 	_getch();
