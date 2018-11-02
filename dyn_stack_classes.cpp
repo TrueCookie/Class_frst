@@ -1,7 +1,6 @@
 #include <iostream>
 #include <conio.h>
 
-
 struct node_t {
 	node_t() {
 		prev = nullptr;
@@ -10,32 +9,33 @@ struct node_t {
 	node_t* prev;
 };
 
-
-class stack {
-private:
+class collection{
+protected:
 	node_t* top;
-	bool is_empty();
+	int size;
 public:
-	stack() {
+	collection() {
 		top = nullptr;
 	};
-	~stack() {
-		//TODO destruct
+	~collection() {
 		while (!is_empty()) {
 			delete top;
 		}
 		std::cout << "Destruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuucting...";
 	};
-
 	void push(int);
-	int* pop();
+	bool is_empty();
 	void read();
+};
+
+class stack : public collection{
+public:
+	int* pop();
 	void reverse();
-	int size;
 };
 
 
-void stack::push(int value) {
+void collection::push(int value) {
     node_t* tmp = new node_t();
     tmp->value = value;
     tmp->prev = top;
@@ -43,7 +43,6 @@ void stack::push(int value) {
 
 	size++;
 }
-
 
 int* stack::pop() {
     if (!is_empty()) {
@@ -59,15 +58,14 @@ int* stack::pop() {
     return nullptr;
 }
 
-bool stack::is_empty() {
+bool collection::is_empty() {
 	return top == nullptr;
 }
 
-void stack::read(){
+void collection::read(){
 	while (!is_empty())
 		std::cout << *pop() << std::endl;
 	}
-
 
 void stack::reverse() { 
 	node_t *t = nullptr;
@@ -85,18 +83,15 @@ void stack::reverse() {
 }
 
 int main() {
-	// int val;
 	stack my_stack;
 
 	int slots_amount = 0;
 	std::cout << "Input the amount of slots: ";
 	std::cin >> slots_amount;
-
+		
 	for (int i = 0; i < slots_amount; ++i) {
 		my_stack.push(i);
 	}
-
-	//TODO: read stack content
 
 	my_stack.reverse();
 
@@ -104,7 +99,6 @@ int main() {
 		my_stack.read();
 	}	
 	
-
 	_getch();
 	return 0;
 }
